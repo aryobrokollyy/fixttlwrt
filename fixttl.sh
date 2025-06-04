@@ -5,6 +5,7 @@
 NFT=/etc/nftables.d/ttl65.nft
 FIX=/usr/bin/fixttl
 CON=/usr/lib/lua/luci/controller/fixttl
+CONFIG=/etc/config/ttlconf
 VIEW=/usr/lib/lua/luci/view/fixttl
 URL=https://raw.githubusercontent.com/aryobrokollyy/fixttlwrt/main
 
@@ -30,6 +31,7 @@ function uninstall()
     	clear
 	echo "Remove Folder n File"
         rm -rf $CON
+	rm -rf $CONFIG
         rm -rf $VIEW
         rm -f $FIX
         rm -f $NFT
