@@ -7,12 +7,18 @@ end
 function get_saved_ttl()
     local uci = require "luci.model.uci".cursor()
     local ttl_str = uci:get("ttlconf", "config", "ttl")
-    local ttl_num = tonumber(ttl_str)
 
+    if not uci:get("ttlconf", "config") then
+        uci:section("ttlconf", "ttlconf", "config", { ttl = "65" })
+        uci:commit("ttlconf")
+        ttl_str = "65"
+    end
+
+    local ttl_num = tonumber(ttl_str)
     if ttl_num and ttl_num > 0 and ttl_num < 256 then
         return ttl_num
     else
-        return nil
+        return 65
     end
 end
 
