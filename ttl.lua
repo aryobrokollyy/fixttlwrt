@@ -6,7 +6,9 @@ end
 
 function get_saved_ttl()
     local uci = require "luci.model.uci".cursor()
-    return tonumber(uci:get("ttlconf", "config", "ttl")) or 65
+    local ttl_str = uci:get("ttlconf", "config", "ttl")
+    local ttl_num = tonumber(ttl_str)
+    return ttl_num or 65
 end
 
 function save_ttl_config(ttl_value)
